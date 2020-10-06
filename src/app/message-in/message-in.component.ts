@@ -223,11 +223,15 @@ myFunction4() {
       let c=0;
       this._httpService.getMessageCount().subscribe((res:any[])=>{
         
+        console.log(res);
       this.startDate=""+(new Date(res[0].date).getFullYear())+"-0"+(new Date(res[0].date).getMonth()+1)+"-0"+(new Date(res[0].date).getDate());
           console.log(this.startDate)
       this.endDate=""+(new Date(res[res.length-1].date).getFullYear())+"-0"+(new Date(res[res.length-1].date).getMonth()+1)+"-0"+(new Date(res[res.length-1].date).getDate());
         this.inputStartDate= this.startDate;
         this.inputEndDate=this.endDate;
+        console.log(this.endDate)
+        console.log(res.length)
+
        for (let i=0;i<res.length;i++)
        {
         var outputArray = []; 
@@ -240,6 +244,7 @@ myFunction4() {
         var lookup = {};
          
         var result = [];
+
         for (let j = 0; j < res.length; j++) { 
           for (let k = 0; k < outputArray.length; k++) { 
               if ( res[j].text == outputArray[k] ) { 
@@ -273,10 +278,12 @@ myFunction4() {
         tableBody.append(markup); 
         lineNo++; 
         c++;
+        console.log(outputArray[i],sum_msg);
+      
        }
-       
+       console.log("endddddddddddddddd")
       });  
-    
+
     }
 
     dateChangerEndexport(enddate: string){

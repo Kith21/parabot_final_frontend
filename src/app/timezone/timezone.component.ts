@@ -135,17 +135,11 @@ myFunction4() {
       this._httpService.getTimezoneCount().subscribe((res:any[])=>{
         let c=0;
         var outputArray = []; 
-          
-      
-        var count = 0; 
+         var count = 0; 
          var aa; 
-        
         var start = false; 
-        var lookup = {};
-         
+        var lookup = {}; 
         var result = [];
-        
-       
         $("table tbody tr").remove();
         
         for (let j = 0; j < res.length; j++) { 
@@ -162,16 +156,8 @@ myFunction4() {
             count = 0; 
           }
        
-      
-     
-        
         let arr=[];
         let index=0;
-        
-        
-        
-      
-
         for(let i=0;i<outputArray.length;i++)
        {
          var yahooOnly = res.filter(function (entry) {

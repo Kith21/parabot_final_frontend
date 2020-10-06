@@ -163,7 +163,9 @@
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
               <h1 class="h2">Dashboard</h1>
+              
               <div class="btn-toolbar mb-2 mb-md-0">
+                  
                   <div class="btn-group mr-2">
                       <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
                       <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
@@ -175,10 +177,34 @@
               </div>
           </div>
           <div>
+                <div class="card ">
+                        <div id="shadow" class="card-body">
+                            <div class="btn-toolbar mb-2 mb-md-0">
+              
+                                <div class="btn-group mr-2">
+                                   <input type="date" #startdate class="form-control" name="startdate" id="startdate" min="{{startDate}}" max="{{endDate}}" value="{{startDate}}" (change)="dateChanger(startdate.value)" /> &#160;&#160;&#160;
+                                   <input type="date" #enddate class="form-control" name="enddate" id="enddate" min="{{startDate1}}" max="{{endDate}}" value="{{startDate1}}" (change)="dateChangerEnd(enddate.value)" /> &#160;&#160;&#160;                    </div>
+                                <div class="col-md-2.5 ml-sm-auto col-lg-15 px-4">
+                                    <select  class="search_categories" #mySelect1 (change)="myFunction_drop(mySelect1.value)" style="height: 40px; width: 150px;">
+                                    <option value="res">All</option>
+                                    <option value="res">Resolved</option>
+                                    <option value="pen">Pending</option>
+                                    <option value="assign">Assigned</option>
+                                      
+                  
+                                    </select>
+                      </div>
+                            </div>
+                        </div>
+                    </div>
+              
               <div class="row card-deck mt-4">
+                  
                   <div class="col-sm-6">
-                      <div id="shadow" class="card border border-light" style="height: 300px;">
-                          <div class="card-body">
+                        
+                      <div id="shadow" class="card border border-light" style="height: 350px;">
+                          
+                        <div class="card-body">
                               <h5 class="card-title bttm">Message activity</h5>
                               <i id="sInfo"><small>Last seven days</small></i>
                               <div class="row">
@@ -208,7 +234,7 @@
                       </div>
                   </div>
                   <div class="col-sm-6">
-                      <div id="shadow" class="card border border-light" style="height: 300px;">
+                      <div id="shadow" class="card border border-light" style="height: 350px;">
                           <div class="card-body">
                               <h5 class="card-title bttm">User Activity</h5>
 
@@ -217,7 +243,7 @@
                               <div class="row">
                                   <div id="outCount">
                                       <p id="outCountTitle"> <small>Total num of users</small></p>
-                                      <p id="outCountP">500</p>
+                                      <p id="outCountP">{{this.totalActivityUserCount}}</p>
                                   </div>
                                   <div id="outCount">
                                       <p id="outCountTitle"> <small>New Users</small></p>
@@ -246,7 +272,7 @@
 
               <div class="row card-deck mt-4">
                   <div class="col-sm-6">
-                    <div id="shadow" class="card border border-light" style="height: 300px;">
+                    <div id="shadow" class="card border border-light" style="height: 400px;">
                         <div class="card-body">
 
                             <h5 class="card-title bttm">Ticket Status</h5>
@@ -286,10 +312,11 @@
                     </div>
                   
                   <div class="col-sm-6">
-                      <div id="shadow" class="card border-light" style="height: 300px;">
+                      <div id="shadow" class="card border-light" style="height: 400px;">
                           <div class="card-body">
                               <h5 class="card-title">Word Cloud</h5>
-                              <div style="text-align: center;"><img id="recentTrans"  src="../../assets/recentTrans1.png" /></div>
+                              <!--<div style="text-align: center;"><img id="recentTrans"  src="../../assets/recentTrans1.png" /></div>-->
+                              <div id="my_dataviz"></div>
                               <button routerLink="/recentTrans" id="messbtn"><i style="color: rgb(219, 46, 124); font-weight: bold;">View Word Cloud report</i> ></button>
                           </div>
                       </div>

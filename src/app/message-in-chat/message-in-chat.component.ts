@@ -119,6 +119,8 @@ myFunction4() {
    console.log(start_date)
    console.log(end_date)
  this._httpService.getMessageChatCount().subscribe((res:any[])=>{
+   console.log(res)
+   console.log(text)
     var diff=date_diff_indays(start_date,end_date);
     //console.log(diff)
    
@@ -164,6 +166,7 @@ myFunction4() {
     console.log(chat_id_list)
     
     this._httpService.getSomeChat().subscribe((res:any[])=>{
+      
       var chats=[];
       var line1;
       var line2;
@@ -178,12 +181,14 @@ myFunction4() {
       });
       
       chat_id_chats_list.push(chat_id_chats);
+     
     }
     for(var row=0;row<chat_id_chats_list.length;row++)
     {
       chats=[]
       for(var row1=0;row1<chat_id_chats_list[row].length;row1++)
       {
+        
         if(chat_id_chats_list[row][row1].text1==text && chat_id_chats_list[row][row1].converser=='user')
         {
           
@@ -195,7 +200,8 @@ myFunction4() {
        else
        {
          line1=chat_id_chats_list[row][row1-1].converser+" : "+chat_id_chats_list[row][row1-1].text;
-       }
+       console.log(line1)
+        }
          line2=chat_id_chats_list[row][row1].converser+" : "+chat_id_chats_list[row][row1].text;
          if(row1==chat_id_chats_list[row].length-1)
          {
@@ -207,7 +213,7 @@ myFunction4() {
          
          chats_list.push(chats)
         }
-        console.log(line2)
+        //console.log(line2)
 
       }
     }
@@ -224,7 +230,7 @@ myFunction4() {
      else{
       temp++;
       
-    markup = "<tr><td>"+(new Date(yahooOnly[z].date).getDate())+"-0"+(new Date(yahooOnly[z].date).getMonth()+1)+"-"+(new Date(yahooOnly[z].date).getFullYear())+"</td><td>"+yahooOnly[z].chat_id+"</td><td>"+yahooOnly[z].count+'</td><td>'+chats_list[temp][0] +'<br><span style="background-color: #FFFF00">'+chats_list[temp][1]+'</span><br>'+chats_list[temp][2]+'<br><a href=/chatdisplayin/'+yahooOnly[z].chat_id+"/"+encodeURI(text)+'>(Read entire chat)'+"</a></td></tr>"; 
+    markup = "<tr><td>"+(new Date(yahooOnly[z].date).getDate())+"-0"+(new Date(yahooOnly[z].date).getMonth()+1)+"-0"+(new Date(yahooOnly[z].date).getFullYear())+"</td><td>"+yahooOnly[z].chat_id+"</td><td>"+yahooOnly[z].count+'</td><td>'+chats_list[temp][0] +'<br><span style="background-color: #FFFF00">'+chats_list[temp][1]+'</span><br>'+chats_list[temp][2]+'<br><a href=/chatdisplayin/'+yahooOnly[z].chat_id+"/"+encodeURI(text)+'>(Read entire chat)'+"</a></td></tr>"; 
     tableBody = $("table tbody"); 
     tableHead=$("shadow")
     //tableHead.append(aa)
