@@ -9,6 +9,6 @@ export class SentichatdispService {
   constructor(private http:HttpClient) { }
   
   getChat(){
-    return this.http.get('http://142.102.27.100:9974/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newsentiment2');
       }
 }

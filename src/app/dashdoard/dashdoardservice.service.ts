@@ -7,25 +7,29 @@ export class DashboardserviceService {
 
   constructor(private http:HttpClient) { }
   getUserActivity(){
-    return this.http.get('http://142.102.27.100:9991/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/useractivity');
       }
   getMessageActivity(){
-    return this.http.get('http://142.102.27.100:9995/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/userwizcount');
      }
   
   getTicketsDetails(){
-    return this.http.get('http://142.102.27.100:9851/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/tickets');
   }
   getMessageActbydate(){
-    return this.http.get('http://142.102.27.100:9872/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newdashchanges');
 
   }
   getAllWords(){
-    return this.http.get('http://142.102.27.100:9983/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/wordcount');
   }
   getWords(){
-    return this.http.get('http://142.102.27.100:9926/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/wordcountdate');
   }
+save(){
+  return this.http.get('http://localhost:8000/');
+}
+
   sendEmail(url, data) {
     
     return this.http.post(url, data);

@@ -11,7 +11,73 @@ import { ExportToCsv } from 'export-to-csv';
 })
 export class AbandontrynextComponent implements OnInit {
   chat_id;
+  isShowDiv1 = true;  
+  isShowDiv2 = true; 
+  isShowDiv3 = true; 
+  isShowDiv4 = true;
+  isShowDiv5 = true;
+  actdata1="+Activity";
+  actdata2="+Compare";
+  actdata3="+Conversation";
+  actdata4="+Demographics";
+  myFunction() {  
+    console.log("bb")
+    this.isShowDiv1 = !this.isShowDiv1;
+    $("#aa").toggleClass("fa-minus-circle")
+} 
+myFunction1() {  
+  this.isShowDiv2 = !this.isShowDiv2;
+  $("#compare").toggleClass("fa-minus-circle")
+} 
+myFunction2() {  
+  this.isShowDiv3= !this.isShowDiv3;
+  $("#conversation").toggleClass("fa-minus-circle")
+} 
+myFunction3() {  
+  this.isShowDiv4= !this.isShowDiv4;
+  $("#demograp").toggleClass("fa-minus-circle")
+} 
+myFunction4() {  
+  this.isShowDiv5= !this.isShowDiv5;
+  $("#settings").toggleClass("fa-minus-circle")
+}
+toggleDisplayDiv1() {
+  this.isShowDiv1 = !this.isShowDiv1;
+  if(this.actdata1==="+Activity"){
+    this.actdata1="-Activity";
+  }else{
+    this.actdata1="+Activity";
+  }
+  
+}
 
+toggleDisplayDiv2() {
+  this.isShowDiv2 = !this.isShowDiv2;
+  if(this.actdata2==="+Compare"){
+    this.actdata2="-Compare";
+  }else{
+    this.actdata2=" +Compare";
+  }
+  
+}
+
+toggleDisplayDiv3() {
+  this.isShowDiv3= !this.isShowDiv3;
+  if(this.actdata3==="+Conversation"){
+    this.actdata3="- Conversation";
+  }else{
+    this.actdata3="+ Conversation";
+  }
+  
+}
+toggleDisplayDiv4() {
+  this.isShowDiv4= !this.isShowDiv4;
+  if(this.actdata4==="+Demographics"){
+    this.actdata4="-Demographics";
+  }else{
+    this.actdata4="+Demographics";
+  }
+}
   constructor(private router:ActivatedRoute,private _httpService:AbandonnextService) { 
     this.chat_id=this.router.snapshot.paramMap.get("id1");
   }

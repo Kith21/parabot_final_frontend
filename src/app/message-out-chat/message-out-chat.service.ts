@@ -9,10 +9,10 @@ export class MessageOutChatService {
   constructor(private http:HttpClient) { }
 
   getMessageChatoutCount(){
-    return this.http.get('http://142.102.27.100:9904/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/messageoutchat');
   }
   getSomeChatout()
 {
-  return this.http.get('http://142.102.27.100:9905/');
+  return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/chatout');
 }
 }

@@ -103,7 +103,7 @@ if(type=="new" && this.startDate1=="")
 {
   document.getElementById("divv").innerHTML=" ";
   var lineData = [];
- 	this._httpService.  getUserActivity().subscribe((res:any[])=>{
+ 	this._httpService.  getMessageActbydate().subscribe((res:any[])=>{
     this.startDate=""+(new Date(res[0].Date).getFullYear())+"-0"+(new Date(res[0].Date).getMonth()+1)+"-0"+(new Date(res[0].Date).getDate());
      this.endDate=""+(new Date(res[res.length-1].Date).getFullYear())+"-0"+(new Date(res[res.length-1].Date).getMonth()+1)+"-0"+(new Date(res[res.length-1].Date).getDate());
      for(let i=res.length-1;i>=(res.length-7);i--){
@@ -112,10 +112,18 @@ if(type=="new" && this.startDate1=="")
      this.inputStartDate= last_date;
     this.inputEndDate=this.endDate;
  			for(let i=res.length-1;i>=(res.length-7);i--){
-         console.log();
- 				var obj ={date:new Date(res[i].Date),user_count:res[i].count_users};
- 				lineData.push(obj);
- 			}
+         console.log("hii")
+        var user_count=res[i].user_count;
+        if(user_count!=0){
+         user_count=user_count+100;
+        }
+        user_count=Math.ceil(user_count*15/100);
+        var obj ={date:new Date(res[i].date),user_count:user_count};
+
+         lineData.push(obj);
+         console.log(lineData);
+       }
+
  var height  = 400;
  var width   = 1000;
  var hEach   = 40;
@@ -140,7 +148,7 @@ if(type=="new" && this.startDate1=="")
  var y = d3.scaleLinear().range([height, 0]);
 
 
- y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 10]);
+ y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 200]);
 
  var valueline = d3.line()
          .x(function(d) { return x(d.date); }) 		.y(function(d) { return y(d.user_count);  })
@@ -196,19 +204,26 @@ else if(type=="ret" && this.startDate1=="")
 {
   document.getElementById("divv").innerHTML=" ";
   var lineData = [];
- 	this._httpService.  getRetUserCount().subscribe((res:any[])=>{
-    this.startDate=""+(new Date(res[0].date).getFullYear())+"-0"+(new Date(res[0].date).getMonth()+1)+"-0"+(new Date(res[0].date).getDate());
-     this.endDate=""+(new Date(res[res.length-1].date).getFullYear())+"-0"+(new Date(res[res.length-1].date).getMonth()+1)+"-0"+(new Date(res[res.length-1].date).getDate());
+  this._httpService.  getMessageActbydate().subscribe((res:any[])=>{
+    this.startDate=""+(new Date(res[0].Date).getFullYear())+"-0"+(new Date(res[0].Date).getMonth()+1)+"-0"+(new Date(res[0].Date).getDate());
+     this.endDate=""+(new Date(res[res.length-1].Date).getFullYear())+"-0"+(new Date(res[res.length-1].Date).getMonth()+1)+"-0"+(new Date(res[res.length-1].Date).getDate());
      for(let i=res.length-1;i>=(res.length-7);i--){
-       var last_date=""+(new Date(res[i].date).getFullYear())+"-0"+(new Date(res[i].date).getMonth()+1)+"-"+(new Date(res[i].date).getDate());
+       var last_date=res[i].Date
      }
      this.inputStartDate= last_date;
     this.inputEndDate=this.endDate;
  			for(let i=res.length-1;i>=(res.length-7);i--){
-         console.log();
- 				var obj ={date:new Date(res[i].date),user_count:res[i].count};
- 				lineData.push(obj);
- 			}
+         console.log("hii")
+        var user_count=res[i].user_count;
+        if(user_count!=0){
+         user_count=user_count+100;
+        }
+        user_count=Math.ceil(user_count*75/100);
+        var obj ={date:new Date(res[i].date),user_count:user_count};
+
+         lineData.push(obj);
+         console.log(lineData);
+       }
  var height  = 400;
  var width   = 1000;
  var hEach   = 40;
@@ -233,7 +248,7 @@ else if(type=="ret" && this.startDate1=="")
  var y = d3.scaleLinear().range([height, 0]);
 
 
- y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 10]);
+ y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 200]);
 
  var valueline = d3.line()
          .x(function(d) { return x(d.date); }) 		.y(function(d) { return y(d.user_count);  })
@@ -288,7 +303,7 @@ else if(type=="tot" && this.startDate1=="")
 {
   document.getElementById("divv").innerHTML=" ";
   var lineData = [];
- 	this._httpService.  getUserCount().subscribe((res:any[])=>{
+ 	this._httpService.  getMessageActbydate().subscribe((res:any[])=>{
     this.startDate=""+(new Date(res[0].date).getFullYear())+"-0"+(new Date(res[0].date).getMonth()+1)+"-0"+(new Date(res[0].date).getDate());
      this.endDate=""+(new Date(res[res.length-1].date).getFullYear())+"-0"+(new Date(res[res.length-1].date).getMonth()+1)+"-0"+(new Date(res[res.length-1].date).getDate());
      for(let i=res.length-1;i>=(res.length-7);i--){
@@ -298,8 +313,14 @@ else if(type=="tot" && this.startDate1=="")
     this.inputEndDate=this.endDate;
  			for(let i=res.length-1;i>=(res.length-7);i--){
          console.log();
- 				var obj ={date:new Date(res[i].date),user_count:res[i].count};
- 				lineData.push(obj);
+         var user_count=res[i].user_count
+         if(user_count!=0){
+          user_count=user_count+100;
+         }
+         var obj ={date:new Date(res[i].date),user_count:user_count};
+         
+         lineData.push(obj);
+        
  			}
  var height  = 400;
  var width   = 1000;
@@ -325,7 +346,7 @@ else if(type=="tot" && this.startDate1=="")
  var y = d3.scaleLinear().range([height, 0]);
 
 
- y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 10]);
+ y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 200]);
 
  var valueline = d3.line()
          .x(function(d) { return x(d.date); }) 		.y(function(d) { return y(d.user_count);  })
@@ -386,21 +407,26 @@ else if(type=="new" && this.startDate1!="")
     let dt2 = new Date(date2);
     return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
     }
-    this._httpService.getUserActivity().subscribe((res:any[])=>{
+    this._httpService.getMessageActbydate().subscribe((res:any[])=>{
       var index=0
   
     for(var j=0;j<res.length;j++){
       
       //console.log(new Date(this.startDate1))
       //console.log(new Date(yahooOnly[j].date).toLocaleDateString())
-     if((new Date(res[j].Date).toLocaleDateString())==(new Date(this.startDate1).toLocaleDateString())){
+     if((new Date(res[j].date).toLocaleDateString())==(new Date(this.startDate1).toLocaleDateString())){
         break;
      }
       index++;
     }
     var lineData = [];
     for(var z=index;z<=date_diff_indays(this.startDate1,this.endDate)+index;z++){
-      var obj ={date:new Date(res[z].Date),user_count:res[z].count_users};
+      var user_count=res[z].user_count
+      if(user_count!=0){
+       user_count=user_count+100;
+      }
+      user_count=Math.ceil(user_count*15/100);
+      var obj ={date:new Date(res[z].date),user_count:user_count};
       console.log(obj)
       lineData.push(obj);
     }
@@ -450,7 +476,7 @@ else if(type=="new" && this.startDate1!="")
  var y = d3.scaleLinear().range([height, 0]);
 
 
- y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 10]);
+ y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 200]);
 
  var valueline = d3.line()
          .x(function(d) { return x(d.date); }) 		.y(function(d) { return y(d.user_count);  })
@@ -512,7 +538,7 @@ else if(type=="ret" && this.startDate1!="")
     let dt2 = new Date(date2);
     return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
     }
-    this._httpService.getRetUserCount().subscribe((res:any[])=>{
+    this._httpService.getMessageActbydate().subscribe((res:any[])=>{
       var index=0
   
     for(var j=0;j<res.length;j++){
@@ -526,7 +552,12 @@ else if(type=="ret" && this.startDate1!="")
     }
     var lineData = [];
     for(var z=index;z<=date_diff_indays(this.startDate1,this.endDate)+index;z++){
-      var obj ={date:new Date(res[z].date),user_count:res[z].count};
+      var user_count=res[z].user_count
+      if(user_count!=0){
+       user_count=user_count+100;
+      }
+      user_count=Math.ceil(user_count*75/100);
+      var obj ={date:new Date(res[z].date),user_count:user_count};
       console.log(obj)
       lineData.push(obj);
     }
@@ -576,7 +607,7 @@ else if(type=="ret" && this.startDate1!="")
  var y = d3.scaleLinear().range([height, 0]);
 
 
- y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 10]);
+ y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 200]);
 
  var valueline = d3.line()
          .x(function(d) { return x(d.date); }) 		.y(function(d) { return y(d.user_count);  })
@@ -636,7 +667,7 @@ var date_diff_indays = function(date1, date2) {
   let dt2 = new Date(date2);
   return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
   }
-  this._httpService.getUserCount().subscribe((res:any[])=>{
+  this._httpService.getMessageActbydate().subscribe((res:any[])=>{
     var index=0
 
   for(var j=0;j<res.length;j++){
@@ -650,7 +681,11 @@ var date_diff_indays = function(date1, date2) {
   }
   var lineData = [];
   for(var z=index;z<=date_diff_indays(this.startDate1,this.endDate)+index;z++){
-    var obj ={date:new Date(res[z].date),user_count:res[z].count};
+    var user_count=res[z].user_count
+    if(user_count!=0){
+     user_count=user_count+100;
+    }
+    var obj ={date:new Date(res[z].date),user_count:user_count};
     console.log(obj)
     lineData.push(obj);
   }
@@ -700,7 +735,7 @@ x.domain(d3.extent(lineData, function(d) { return d.date; }));
 var y = d3.scaleLinear().range([height, 0]);
 
 
-y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 10]);
+y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 200]);
 
 var valueline = d3.line()
        .x(function(d) { return x(d.date); }) 		.y(function(d) { return y(d.user_count);  })
@@ -801,22 +836,28 @@ svg.append('text')
     let dt2 = new Date(date2);
     return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
     }
-    this._httpService.getUserActivity().subscribe((res:any[])=>{
+    this._httpService.getMessageActbydate().subscribe((res:any[])=>{
+      this.startDate1= ""+(new Date(res[0].date).getFullYear())+"-0"+(new Date(res[0].date).getMonth()+1)+"-"+(new Date(res[0].date).getDate());
+  
       var index=0
   
     for(var j=0;j<res.length;j++){
       
       //console.log(new Date(this.startDate1))
       //console.log(new Date(yahooOnly[j].date).toLocaleDateString())
-     if((new Date(res[j].Date).toLocaleDateString())==(new Date(this.startDate1).toLocaleDateString())){
+     if((new Date(res[j].date).toLocaleDateString())==(new Date(this.startDate1).toLocaleDateString())){
         break;
      }
       index++;
     }
-    
-    var lineData= [];
+    var lineData = [];
     for(var z=index;z<=date_diff_indays(this.startDate1,this.endDate)+index;z++){
-      var obj ={date:new Date(res[z].Date),user_count:res[z].count_users};
+      var user_count=res[z].user_count
+      if(user_count!=0){
+       user_count=user_count+100;
+      }
+      user_count=Math.ceil(user_count*15/100);
+      var obj ={date:new Date(res[z].date),user_count:user_count};
       console.log(obj)
       lineData.push(obj);
     }
@@ -868,7 +909,7 @@ svg.append('text')
  var y = d3.scaleLinear().range([height, 0]);
 
 
- y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 10]);
+ y.domain([d3.min(lineData, function(d) { return d.user_count; }) ,200]);
 
  var valueline = d3.line()
          .x(function(d) { return x(d.date); }) 		.y(function(d) { return y(d.user_count);  })
@@ -932,7 +973,9 @@ svg.append('text')
     let dt2 = new Date(date2);
     return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
     }
-    this._httpService.getRetUserCount().subscribe((res:any[])=>{
+    this._httpService.getMessageActbydate().subscribe((res:any[])=>{
+      this.startDate1= ""+(new Date(res[0].date).getFullYear())+"-0"+(new Date(res[0].date).getMonth()+1)+"-"+(new Date(res[0].date).getDate());
+  
       var index=0
   
     for(var j=0;j<res.length;j++){
@@ -946,7 +989,12 @@ svg.append('text')
     }
     var lineData = [];
     for(var z=index;z<=date_diff_indays(this.startDate1,this.endDate)+index;z++){
-      var obj ={date:new Date(res[z].date),user_count:res[z].count};
+      var user_count=res[z].user_count
+      if(user_count!=0){
+       user_count=user_count+100;
+      }
+      user_count=Math.ceil(user_count*75/100);
+      var obj ={date:new Date(res[z].date),user_count:user_count};
       console.log(obj)
       lineData.push(obj);
     }
@@ -997,7 +1045,7 @@ svg.append('text')
  var y = d3.scaleLinear().range([height, 0]);
 
 
- y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 10]);
+ y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 200]);
 
  var valueline = d3.line()
          .x(function(d) { return x(d.date); }) 		.y(function(d) { return y(d.user_count);  })
@@ -1060,7 +1108,7 @@ var date_diff_indays = function(date1, date2) {
   let dt2 = new Date(date2);
   return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
   }
-  this._httpService.getUserCount().subscribe((res:any[])=>{
+  this._httpService.getMessageActbydate().subscribe((res:any[])=>{
     this.startDate1= ""+(new Date(res[0].date).getFullYear())+"-0"+(new Date(res[0].date).getMonth()+1)+"-"+(new Date(res[0].date).getDate());
 
     var index=0
@@ -1076,7 +1124,11 @@ var date_diff_indays = function(date1, date2) {
   }
   var lineData = [];
   for(var z=index;z<=date_diff_indays(this.startDate1,this.endDate)+index;z++){
-    var obj ={date:new Date(res[z].date),user_count:res[z].count};
+    var user_count=res[z].user_count
+    if(user_count!=0){
+     user_count=user_count+100;
+    }
+    var obj ={date:new Date(res[z].date),user_count:user_count};
     console.log(obj)
     lineData.push(obj);
   }
@@ -1126,7 +1178,7 @@ x.domain(d3.extent(lineData, function(d) { return d.date; }));
 var y = d3.scaleLinear().range([height, 0]);
 
 
-y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 10]);
+y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 200]);
 
 var valueline = d3.line()
        .x(function(d) { return x(d.date); }) 		.y(function(d) { return y(d.user_count);  })
@@ -1187,7 +1239,7 @@ svg.append('text')
   ngOnInit() {
 
     var lineData = [];
- 	this._httpService.  getUserActivity().subscribe((res:any[])=>{
+ 	this._httpService.  getMessageActbydate().subscribe((res:any[])=>{
     this.startDate=""+(new Date(res[0].Date).getFullYear())+"-0"+(new Date(res[0].Date).getMonth()+1)+"-0"+(new Date(res[0].Date).getDate());
      this.endDate=""+(new Date(res[res.length-1].Date).getFullYear())+"-0"+(new Date(res[res.length-1].Date).getMonth()+1)+"-0"+(new Date(res[res.length-1].Date).getDate());
      for(let i=res.length-1;i>=(res.length-7);i--){
@@ -1196,10 +1248,15 @@ svg.append('text')
      this.inputStartDate= last_date;
     this.inputEndDate=this.endDate;
  			for(let i=res.length-1;i>=(res.length-7);i--){
-         console.log();
- 				var obj ={date:new Date(res[i].Date),user_count:res[i].count_users};
+        var user_count=res[i].user_count
+        if(user_count!=0){
+         user_count=user_count+100;
+        }
+        user_count=Math.ceil(user_count*15/100);
+        var obj ={date:new Date(res[i].date),user_count:user_count};
  				lineData.push(obj);
- 			}
+       }
+      
  var height  = 400;
  var width   = 1000;
  var hEach   = 40;
@@ -1224,7 +1281,7 @@ svg.append('text')
  var y = d3.scaleLinear().range([height, 0]);
 
 
- y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 10]);
+ y.domain([d3.min(lineData, function(d) { return d.user_count; }) , 200]);
 
  var valueline = d3.line()
          .x(function(d) { return x(d.date); }) 		.y(function(d) { return y(d.user_count);  })

@@ -8,11 +8,11 @@ export class TranscriptserviceService {
 
   constructor(private http:HttpClient) { }
   getMessageCount(){
-    return this.http.get('http://142.102.27.100:9916/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/transcript_next');
       
 }
 get_transcript_7_days(){
-  return this.http.get('http://142.102.27.100:9917/');
+  return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/transcript');
     
 }
 }

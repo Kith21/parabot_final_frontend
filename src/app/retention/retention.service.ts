@@ -7,23 +7,23 @@ export class RetentionService {
 
   constructor(private http:HttpClient) { }
   getNewDayCount(){
-    return this.http.get('http://142.102.27.100:9993/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newuserdate');
       }
   getNewWeekCount(){
-    return this.http.get('http://142.102.27.100:9984/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newuserweek');
   }
   getNewMonthCount(){
-    return this.http.get('http://142.102.27.100:9985/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/retmonth');
   }
 
 
   getExistingDayCount(){
-    return this.http.get('http://142.102.27.100:9990/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/retusers');
       }
   getExistingWeekCount(){
-    return this.http.get('http://142.102.27.100:9986/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/retusersweek');
   }
   getExistingMonthCount(){
-    return this.http.get('http://142.102.27.100:9987/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/retusermonth');
   }
 }

@@ -1,9 +1,9 @@
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/dashboard" style="font-size: 25px;">Parabot<img id="logo" src="../../assets/Logo.png" /></a>
-    <input class="form-control form-control-dark w-100" type="text"  placeholder="Search" on-keyup="router1(searchText)" aria-label="Search" [(ngModel)]="searchText" >
+    <input class="form-control form-control-dark w-100" type="text"  placeholder="Search"  aria-label="Search"  >
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a href="javascript:void(0);" (click)="logout()">Sign out</a>
+            <a href="javascript:void(0);" >Sign out</a>
         </li>
     </ul>
   </nav>
@@ -38,7 +38,7 @@
 
                             <a class="nav-link active"  (click)=myFunction() style="font-size: 20px;font-family: 'Aleo';" data-toggle="tooltip" data-placement="bottom" title="Different activities in parabot ">
 
-                                <span data-feather="home"></span><i class="fa fa-fw fa-address-card"></i> Activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i id="aa"(click)="myFunction(aa)"
+                                <span data-feather="home"></span><i class="fa fa-fw fa-address-card"></i> Activity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i id="aa"(click)="myFunction()"
                                 class="fa fa-plus-circle"></i> <span class="sr-only">(current)</span>
 
                             </a>
@@ -205,8 +205,7 @@
                       <div id="shadow" class="card border border-light" style="height: 350px;">
                           
                         <div class="card-body">
-                              <h5 class="card-title bttm">Message activity</h5>
-                              <i id="sInfo"><small>Last seven days</small></i>
+                              <h5 class="card-title bttm">Message activity</h5><br><br>
                               <div class="row">
                                   <div id="outCount">
                                       <!-- &#9679; -->
@@ -217,28 +216,22 @@
                                       <p id="outCountTitle"> <small>Outgoing Message</small></p>
                                       <p id="outCountP">{{this.wizardMessageCount}}</p>
                                   </div>
-                              </div>
-                              <div class="row">
                                   <div id="outCount">
-                                      <p id="outCountTitle"><small> Total Message</small></p>
-                                      <p id="outCountP">{{this.totalMessageCount}}</p>
-                                  </div>
-                                  <div id="outCount">
-                                      <p id="outCountTitle"><small>Todays Total Message</small></p>
-                                      <p id="outCountP">{{this.totalTodayMessageCount}}</p>
-                                  </div>
+                                    <p id="outCountTitle"><small> Total Message</small></p>
+                                    <p id="outCountP">{{this.totalMessageCount}}</p>
+                                </div>
                               </div>
+                            
 
-                              <button routerLink="/messagecount" id="messbtn"><i style="color: rgb(219, 46, 124); font-weight: bold;">View Message activity report</i> ></button>
+                              <button routerLink="/messagecount" id="messbtn"><i style="color: rgb(219, 46, 124); font-weight: bold;">View Message activity report</i> </button>
                           </div>
                       </div>
                   </div>
                   <div class="col-sm-6">
                       <div id="shadow" class="card border border-light" style="height: 350px;">
                           <div class="card-body">
-                              <h5 class="card-title bttm">User Activity</h5>
+                              <h5 class="card-title bttm">User Activity</h5><br><br>
 
-                              <i id="sInfo"><small>Last seven days</small></i><br><br>
                              
                               <div class="row">
                                   <div id="outCount">
@@ -263,7 +256,7 @@
                             
                               
 
-                              <button routerLink="/useractivity" id="messbtn"><i style="color: rgb(219, 46, 124); font-weight: bold;">View User Activity report</i> ></button>
+                              <button routerLink="/useractivity" id="messbtn"><i style="color: rgb(219, 46, 124); font-weight: bold;">View User Activity report</i> </button>
 
                           </div>
                       </div>
@@ -275,36 +268,23 @@
                     <div id="shadow" class="card border border-light" style="height: 400px;">
                         <div class="card-body">
 
-                            <h5 class="card-title bttm">Ticket Status</h5>
-                          
-                           <i id="sInfo"><small>     </small></i>
-                           
-                    <br>
-
-                          
-                            <div class="row">
+                            <h5 class="card-title bttm">Ticket Status</h5><br><br>
+                             <div class="row">
                                 <div id="outCount">
                                     <p id="outCountTitle"> <small>Resolved Chats</small></p>
-                                    <p id="outCountP">60%</p>
+                                    <p id="outCountP">{{this.resolvedchats}}</p>
                                 </div>
                                 <div id="outCount">
                                     <p id="outCountTitle"> <small>Pending Chats</small></p>
-                                    <p id="outCountP">15%</p>
+                                    <p id="outCountP">{{this.pendingchats}}</p>
                                 </div>
-                                <div id="outCount">
-                                    <p id="outCountTitle"><small>Assigned Chats</small></p>
-                                    <p id="outCountP">25%</p>
-                                </div>
-                            </div>
-                           <!-- <div class="row">
                                 <div id="outCount">
                                     <p id="outCountTitle"><small>Assigned Chats</small></p>
                                     <p id="outCountP">{{this.assignedchats}}</p>
                                 </div>
-
-
-                            </div>-->
-                         <button routerLink="/ticketscount" id="messbtn"><i style="color: rgb(219, 46, 124); font-weight: bold;">View Ticket Status report</i> ></button>
+                            </div>
+                           
+                         <button routerLink="/ticketscount" id="messbtn"><i style="color: rgb(219, 46, 124); font-weight: bold;">View Ticket Status report</i> </button>
 
                             </div>
                            
@@ -315,9 +295,10 @@
                       <div id="shadow" class="card border-light" style="height: 400px;">
                           <div class="card-body">
                               <h5 class="card-title">Word Cloud</h5>
-                              <!--<div style="text-align: center;"><img id="recentTrans"  src="../../assets/recentTrans1.png" /></div>-->
-                              <div id="my_dataviz"></div>
-                              <button routerLink="/recentTrans" id="messbtn"><i style="color: rgb(219, 46, 124); font-weight: bold;">View Word Cloud report</i> ></button>
+                             <div style="text-align: center;"><img id="recentTrans"  src="../../assets/recentTrans1.png" /></div>
+                              <!--<div id="my_dataviz"></div>-->
+                              <button routerLink="/recentTrans" id="messbtn"><i style="color: rgb(219, 46, 124); font-weight: bold;">View Word Cloud report</i>
+                            </button>
                           </div>
                       </div>
                   </div>
@@ -360,12 +341,7 @@
               <input  placeholder="Message" [formControl]="msgFormControl"/><br><br>
         
         
-            <button
-              color="primary"
-              (click)="register()"
-            >
-              {{buttionText}}
-            </button>
+            <button color="primary"(click)="register()">{{buttionText}}</button>
         </form>
         <!-- <button [routerLink]="['/profile', 12367]">Go to Profile</button> -->
         <br />

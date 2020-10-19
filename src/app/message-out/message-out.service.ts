@@ -8,7 +8,7 @@ export class MessageOutService {
   constructor(private http:HttpClient) { }
 
     getMessageCount(){
-      return this.http.get('http://142.102.27.100:9903/');
+      return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/messageout');
         
   }
 }

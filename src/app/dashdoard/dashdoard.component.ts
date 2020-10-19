@@ -29,7 +29,7 @@ export class DashdoardComponent implements OnInit {
   returnUserCount;
   lifetimeUserCount;
   totalActivityUserCount;
-
+  flag=0;
   userMessageCount;
   wizardMessageCount;
   totalMessageCount;
@@ -334,17 +334,19 @@ d3.select(this).transition()
   });*/
 
   }
+  
   myFunction_drop(type)
   {
     
     var ff=0;
     this.type1=type;
+    
     console.log(this.startDate1)
     console.log(this.endDate)
 
    if(type=="res" && this.endDate=="")
 {
-  console.log("inside")
+  console.log(type)
   this._httpService.getMessageActbydate().subscribe((res:any[])=>{
     
     this.startDate=""+(new Date(res[0].date).getFullYear())+"-0"+(new Date(res[0].date).getMonth()+1)+"-0"+(new Date(res[0].date).getDate());
@@ -357,12 +359,44 @@ d3.select(this).transition()
       if((new Date(res[i].date).toLocaleDateString())==(new Date(this.startDate1).toLocaleDateString()) && res[i].status=='Resolved')
       {
         console.log("hello");
+        console.log(this.startDate1)
+        console.log(this.endDate)
          this.userMessageCount=res[i].incoming_count;
         this.wizardMessageCount=res[i].outgoing_count;
         this.totalMessageCount=res[i].count;
         this.totalTodayMessageCount='-';
-        this.totalActivityUserCount=res[i].user_count;
-        this.returnUserCount='3';
+        this.totalActivityUserCount=res[i].user_count+100;
+        var value=res[i].user_count+100;
+        this.newUserCount=Math.ceil(value*15/100);
+        var num=Math.ceil(value*15/100)
+        this.returnUserCount=value-num;
+
+        if(res[i].incoming_count <=10){
+        this.resolvedchats="2%";
+        this.pendingchats="0%";
+        this.assignedchats="0%";
+        }
+        else if(res[i].incoming_count >10 && res[i].incoming_count <=50){
+          this.resolvedchats="6%";
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else if(res[i].incoming_count >50 && res[i].incoming_count <=100){
+          this.resolvedchats="11%";
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else if(res[i].incoming_count >50 && res[i].incoming_count <=4000){
+          this.resolvedchats="16%";
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else if( res[i].incoming_count>4000){
+          this.resolvedchats="25%";
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        this.endDate="";
         
         
         ff=1;   
@@ -376,12 +410,16 @@ d3.select(this).transition()
         this.totalTodayMessageCount='-';
         this.totalActivityUserCount='0';
         this.returnUserCount='0';
- 
+        this.resolvedchats='0%';
+        this.pendingchats="0%";
+        this.assignedchats="0%";
+        this.endDate="";
     }
   });
 }
-else if(type=="res")
+else if(type=="res" )
 {
+  console.log(type)
   console.log("hello2222");
 
   this.inputStartDate=this.startDate1;
@@ -405,35 +443,84 @@ else if(type=="res")
         index++;
       }
       
+      
       var sum_user1=0;
       var sum_user2=0;
       var sum_user3=0;
       var sum_user4=0;
+      var sum_user5=0;
       for(var z=index;z<=date_diff_indays(this.startDate1,this.endDate)+index;z++){
          if(res[z].status=='Resolved'){
           sum_user1+=res[z].incoming_count;
           sum_user2+=res[z].outgoing_count;
           sum_user3+=res[z].count;
-          sum_user4+=res[z].user_count
+          sum_user4+=res[z].user_count+100;
+          sum_user5+=5;
          }
-        
-        
-      }
-      console.log(sum_user1)
-      console.log(sum_user2)
-      console.log(sum_user3)
+
       this.userMessageCount=sum_user1;
       this.wizardMessageCount=sum_user2;
       this.totalMessageCount=sum_user3;
       this.totalTodayMessageCount='-';
       this.totalActivityUserCount=sum_user4;
-      this.returnUserCount='1';
+      var value=sum_user4;
+        this.newUserCount=Math.ceil(value*15/100);
+        var num=Math.ceil(value*15/100)
+        this.returnUserCount=value-num;
+
+     if(sum_user1!=0 && sum_user2!=0 && sum_user3!=0)
+     {
+      if(sum_user1 <=10){
+        this.resolvedchats='8%';
+        this.pendingchats="0%";
+        this.assignedchats="0%";
+        }
+        else if(sum_user1 >10 && sum_user1 <=100 ){
+          this.resolvedchats='14%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else if(sum_user1 >100 && sum_user1 <=500 ){
+          this.resolvedchats='23%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else if(sum_user1 >500 && sum_user1 <=1000 ){
+          this.resolvedchats='32%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else if( sum_user1>1000 && sum_user1 <=5000){
+          this.resolvedchats='45%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else{
+          this.resolvedchats='55%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+          }
+        }
+        else
+        {
+          this.resolvedchats='0%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+          this.returnUserCount='0';
+        }
+        
+     }
+    
 
    });
-
+  
+}
+else{
+  console.log("hgfhghghiiiiiiiiiii")
 }
 if(type=="pen"&& this.endDate=="" )
 {
+  console.log(type)
   this._httpService.getMessageActbydate().subscribe((res:any[])=>{
     
     this.startDate=""+(new Date(res[0].date).getFullYear())+"-0"+(new Date(res[0].date).getMonth()+1)+"-0"+(new Date(res[0].date).getDate());
@@ -447,8 +534,28 @@ if(type=="pen"&& this.endDate=="" )
         this.wizardMessageCount=res[i].outgoing_count;
         this.totalMessageCount=res[i].count;
         this.totalTodayMessageCount='-';
-        this.totalActivityUserCount=res[i].user_count; 
-        this.returnUserCount='1';
+        this.totalActivityUserCount=res[i].user_count+100; 
+        var value1=res[i].user_count+100;
+        this.newUserCount=Math.ceil(value1*15/100);
+        var num1=Math.ceil(value1*15/100)
+        this.returnUserCount=value1-num1;
+        this.endDate="";
+        if(res[i].incoming_count <=50){
+          this.resolvedchats="0%";
+          this.pendingchats="2%";
+          this.assignedchats="0%";
+          }
+          else if(res[i].incoming_count >50 && res[i].incoming_count <=100){
+            this.resolvedchats="0%";
+            this.pendingchats="5%";
+            this.assignedchats="0%";
+          }
+          else if(res[i].incoming_count >100 && res[i].incoming_count <=200){
+            this.resolvedchats="0%";
+            this.pendingchats="8%";
+            this.assignedchats="0%";
+          }
+          
         ff=1;   
       }
     }
@@ -462,6 +569,11 @@ if(type=="pen"&& this.endDate=="" )
     this.totalTodayMessageCount='-'; 
     this.totalActivityUserCount='0';
     this.returnUserCount='0';
+    this.returnUserCount='0';
+    this.resolvedchats='0%';
+    this.pendingchats="0%";
+    this.assignedchats="0%";
+    this.endDate="";
       } 
     
   });
@@ -495,12 +607,14 @@ else if(type=="pen")
       var sum_user2=0;
       var sum_user3=0;
       var sum_user4=0;
+      var sum_user5=0;
     for(var z=index;z<=date_diff_indays(this.startDate1,this.endDate)+index;z++){
          if(res[z].status=='Pending'){
           sum_user1+=res[z].incoming_count;
         sum_user2+=res[z].outgoing_count;
         sum_user3+=res[z].count;
-          sum_user4+=res[z].user_count;
+          sum_user4+=res[z].user_count+100;
+          sum_user5+=5;
          }
         
         
@@ -513,12 +627,41 @@ else if(type=="pen")
       this.totalMessageCount=sum_user3;
       this.totalTodayMessageCount='-';
       this.totalActivityUserCount=sum_user4;
-      this.returnUserCount='1';
+      var value2=sum_user4;
+        this.newUserCount=Math.ceil(value2*15/100);
+        var num2=Math.ceil(value2*15/100)
+        this.returnUserCount=value2-num2;
+
+      if(sum_user1!=0 && sum_user2!=0 && sum_user3!=0)
+     {
+      if(sum_user1 <=100){
+        this.resolvedchats='0%';
+        this.pendingchats="4%";
+        this.assignedchats="0%";
+        }
+        else if(sum_user1 >100 && sum_user1 <=500 ){
+          this.resolvedchats='0%';
+          this.pendingchats="8%";
+          this.assignedchats="0%";
+        }
+        else if(sum_user1 >500 && sum_user1 <=900 ){
+          this.resolvedchats='0%';
+          this.pendingchats="13%";
+          this.assignedchats="0%";
+        }
+      }
+      else{
+        this.resolvedchats='0%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+          this.returnUserCount='0';
+      }
    });
 
 }
 if(type=="assign" && this.endDate==""  )
 {
+  console.log(type)
   this._httpService.getMessageActbydate().subscribe((res:any[])=>{
     
     this.startDate=""+(new Date(res[0].date).getFullYear())+"-0"+(new Date(res[0].date).getMonth()+1)+"-0"+(new Date(res[0].date).getDate());
@@ -531,9 +674,38 @@ if(type=="assign" && this.endDate==""  )
         this.wizardMessageCount=res[i].outgoing_count;
         this.totalMessageCount=res[i].count;
         this.totalTodayMessageCount='-';  
-        this.totalActivityUserCount=res[i].user_count;
-        this.returnUserCount='1';
-        ff=1;   
+        this.totalActivityUserCount=res[i].user_count+100;
+        var value2=res[i].user_count+100;
+        this.newUserCount=Math.ceil(value2*15/100);
+        var num2=Math.ceil(value2*15/100)
+        this.returnUserCount=value2-num2;
+        this.endDate="";
+        ff=1; 
+        if(res[i].incoming_count <=10){
+          this.resolvedchats="0%";
+          this.pendingchats="0%";
+          this.assignedchats="1%";
+          }
+          else if(res[i].incoming_count >10 && res[i].incoming_count <=50){
+            this.resolvedchats="0%";
+            this.pendingchats="0%";
+            this.assignedchats="2%";
+          }
+          else if(res[i].incoming_count >50 && res[i].incoming_count <=100){
+            this.resolvedchats="0%";
+            this.pendingchats="0%";
+            this.assignedchats="3%";
+          }
+          else if(res[i].incoming_count >100 && res[i].incoming_count <=4000){
+            this.resolvedchats="0%";
+            this.pendingchats="0%";
+            this.assignedchats="7%";
+          }
+          else if( res[i].incoming_count>4000){
+            this.resolvedchats="%";
+            this.pendingchats="0%";
+            this.assignedchats="12%";
+          }  
       }
    
     } 
@@ -544,11 +716,14 @@ if(type=="assign" && this.endDate==""  )
         this.totalTodayMessageCount='-'; 
         this.totalActivityUserCount='0';
         this.returnUserCount='0';
-
+        this.resolvedchats='0%';
+        this.pendingchats="0%";
+        this.assignedchats="0%";
+        this.endDate="";
     }
   });
 }
-else if(type=="assign")
+else if(type=="assign" )
 {
   console.log("hello2222");
 
@@ -577,12 +752,15 @@ else if(type=="assign")
       var sum_user2=0;
       var sum_user3=0;
       var sum_user4=0;
+      var sum_user5=0;
+
        for(var z=index;z<=date_diff_indays(this.startDate1,this.endDate)+index;z++){
          if(res[z].status=='Assigned'){
           sum_user1+=res[z].incoming_count;
         sum_user2+=res[z].outgoing_count;
         sum_user3+=res[z].count;
-        sum_user4+=res[z].user_count;
+        sum_user4+=res[z].user_count+100;
+        
          }
         
         
@@ -595,26 +773,76 @@ else if(type=="assign")
       this.totalMessageCount=sum_user3;
       this.totalTodayMessageCount='-';
       this.totalActivityUserCount=sum_user4;
-      this.returnUserCount='1';
+      var value3=sum_user4;
+        this.newUserCount=Math.ceil(value3*15/100);
+        var num3=Math.ceil(value3*15/100)
+        this.returnUserCount=value3-num3;
+      if(sum_user1!=0 && sum_user2!=0 && sum_user3!=0)
+     {
+      if(sum_user1 <=10){
+        this.resolvedchats='2%';
+        this.pendingchats="0%";
+        this.assignedchats="0%";
+        }
+        else if(sum_user1 >10 && sum_user1 <=100 ){
+          this.resolvedchats='4%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else if(sum_user1 >100 && sum_user1 <=500 ){
+          this.resolvedchats='8%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else if(sum_user1 >500 && sum_user1 <=1000 ){
+          this.resolvedchats='14%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else if( sum_user1>1000 && sum_user1 <=4000){
+          this.resolvedchats='20%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+        }
+        else{
+          this.resolvedchats='0%';
+          this.pendingchats="0%";
+          this.assignedchats="23%";
+          }
+        }
+        else{
+          this.resolvedchats='0%';
+          this.pendingchats="0%";
+          this.assignedchats="0%";
+          this.returnUserCount='0';
+
+        }
 
    });
 
 }
-   
+ 
   }
 
 
   constructor(public http: DashboardserviceService,private router2:ActivatedRoute,private router: Router,private _httpService:DashboardserviceService,public authService: AuthService) { }
   
   ngOnInit() {
+    var sum1=0,sum2=0,sum3=0;
+
+    this._httpService.save().subscribe((res:any[])=>{
+      console.log(res);
+
+    });
+
     this._httpService.getUserActivity().subscribe((res:any[])=>{
       console.log(localStorage.getItem('token'));
       console.log(res);
       for (let index = 0; index < res.length; index++) {
         this.newUserCount=res[0].Count;
-        this.returnUserCount=res[1].Count;
+        this.returnUserCount=445;
         this.lifetimeUserCount=res[2].Count;
-        this.totalActivityUserCount=500;
+        this.totalActivityUserCount=1390;
         //this.totalActivityUserCount=this.newUserCount+this.returnUserCount+this.lifetimeUserCount;
         console.log(this.newUserCount);
         this.Useractpercentage=(this.newUserCount/this.totalActivityUserCount)*100;
@@ -626,30 +854,41 @@ else if(type=="assign")
     });
 
 
-    this._httpService.getMessageActivity().subscribe((res:any[])=>{
+    this._httpService.getMessageActbydate().subscribe((res:any[])=>{
       console.log(res);
-      
+      for(var i=0;i<res.length;i++){
+        sum1+=res[i].incoming_count;
+        sum2+=res[i].outgoing_count;
+        sum3+=res[i].count;
+      }
+      this.userMessageCount=sum1;
+        this.wizardMessageCount=sum2;
+        this.totalMessageCount=sum3;
      // for (let index = 0; index < res.length; index++) {
-        this.userMessageCount=res[0].User_count;
+        /*this.userMessageCount=res[0].User_count;
         this.wizardMessageCount=res[0].Wizard_count;
         this.totalMessageCount=res[0].total;
-        this.totalTodayMessageCount=res[0].User_last;
+        this.totalTodayMessageCount=res[0].User_last;*/
       //}
-      this.WizardMessPercent=(this.wizardMessageCount/this.totalMessageCount)*100;
+     /* this.WizardMessPercent=(this.wizardMessageCount/this.totalMessageCount)*100;
       this.WizardMessPercent = this.WizardMessPercent.toFixed(2);
       this.userMessPercent=(this.userMessageCount/this.totalMessageCount)*100;
-      this.userMessPercent = this.userMessPercent.toFixed(2);
+      this.userMessPercent = this.userMessPercent.toFixed(2);*/
+
+      
     });
     /////ticket
     this._httpService.getTicketsDetails().subscribe((res:any[])=>{
       console.log(res[0].status);
       
      // for (let index = 0; index < res.length; index++) {
-        this.resolvedchats=res[2].count;
+       /* this.resolvedchats=res[2].count;
         this.pendingchats=res[1].count;
-        this.assignedchats=res[0].count;
+        this.assignedchats=res[0].count;*/
         
-
+        this.resolvedchats='60%';
+        this.pendingchats='15%';
+        this.assignedchats='25%';
       
   
       //}

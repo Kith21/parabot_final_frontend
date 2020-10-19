@@ -9,7 +9,7 @@ export class MessageInService {
   constructor(private http:HttpClient) { }
 
     getMessageCount(){
-      return this.http.get('http://142.102.27.100:9900/');
-        
+      return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/messagein');
+      /*return this.http.get('http://localhost:9900/');*/
   }
 }

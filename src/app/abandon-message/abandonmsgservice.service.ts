@@ -8,6 +8,6 @@ export class AbandonmsgserviceService {
 
   constructor(private http:HttpClient) { }
   getabandonmsg(){
-    return this.http.get('http://localhost:9929/');
+    return this.http.get('http://10.128.0.2:9929/');
 }
 }

@@ -7,23 +7,23 @@ export class CompareService {
 
   constructor(private http:HttpClient) { }
   getNewUserCount(){
-    return this.http.get('http://142.102.27.100:9908/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newusercompare');
       
 }
 getRetUserCount(){
-  return this.http.get('http://142.102.27.100:9907/');
+  return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/retusercompare');
     
 }
 getMessageCount(){
-  return this.http.get('http://142.102.27.100:9909/');
+  return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/messagecompare');
     
 }
 getUserCount(){
-  return this.http.get('http://142.102.27.100:9912/');
+  return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/totalusercompare');
     
 }
 getGenderCount(){
-  return this.http.get('http://142.102.27.100:9910/');
+  return this.http.get('http://10.128.0.2:9910/');
     
 }
 

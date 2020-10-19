@@ -9,12 +9,12 @@ export class MessagecountService {
   constructor(private http:HttpClient) { }
 
   getMessageCount(){
-    return this.http.get('http://142.102.27.100:9945/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/user');
       }
       getMessageOutCount(){
-        return this.http.get('http://142.102.27.100:9922/');
+        return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/daywise');
           }
           getMessageTotalCount(){
-            return this.http.get('http://142.102.27.100:9909/');
+            return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/messagecompare');
               }
 }

@@ -11,7 +11,7 @@ export class TransearchService {
 
   TransResults(cust:object){
   	console.log(cust);
-  	return this.http.post<TransFilter>('http://142.102.27.100:8011/',cust);
+  	return this.http.post<TransFilter>('http://10.128.0.2:8011/',cust);
 
   }
 }

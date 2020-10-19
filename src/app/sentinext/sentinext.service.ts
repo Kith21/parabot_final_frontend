@@ -9,10 +9,10 @@ export class SentinextService {
   constructor(private http:HttpClient) { }
 
   getChatid(){
-    return this.http.get('http://142.102.27.100:9964/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newsentiment1');
       }
     
   getChat(){
-        return this.http.get('http://142.102.27.100:9974/');
+        return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newsentiment2');
           }
 }

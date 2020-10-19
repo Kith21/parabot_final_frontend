@@ -9,14 +9,14 @@ export class TicketscountService {
 
    }
    getResolvedDetails(){
-    return this.http.get('http://142.102.27.100:9852/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/resolved');
       }
       getPendingDetails(){
-        return this.http.get('http://142.102.27.100:9853/');
+        return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/pending');
           }
     
     getAssignedDetails(){
-      return this.http.get('http://142.102.27.100:9854/');
+      return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/assigned');
         }
       }
 

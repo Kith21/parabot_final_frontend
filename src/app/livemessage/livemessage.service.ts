@@ -8,6 +8,6 @@ export class LivemessageService {
   constructor(private http:HttpClient) { }
 
   getLiveActivity(){
-    return this.http.get('http://142.102.27.100:9990/');
+    return this.http.get('http://10.128.0.2:9990/');
   }
 }

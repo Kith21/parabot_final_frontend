@@ -7,18 +7,18 @@ export class SentimentService {
 
   constructor(private http:HttpClient) { }
   getSentimentDays(){
-    return this.http.get('http://142.102.27.100:9946/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newsentiment');
   }
   getMessageCount(){
-    return this.http.get('http://142.102.27.100:9946/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newsentiment');
       }
   getChatid(){
-        return this.http.get('http://142.102.27.100:9964/');
+        return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newsentiment1');
           }
 
 
   getfulldate(){
-    return this.http.get('http://142.102.27.100:9946/');
+    return this.http.get('https://pythoncode-dot-ft-bal-jdnxov.uc.r.appspot.com/newsentiment');
 
 
 

@@ -8,6 +8,6 @@ export class GenderviewService {
   constructor(private http:HttpClient) { }
 
   getMessageCount(){
-    return this.http.get('http://142.102.27.100:9975/');
+    return this.http.get('http://10.128.0.2:9975/');
       }
 }
